@@ -52,7 +52,7 @@
     <div>
       <div class="title">Edward’s Growth Timeline</div>
       <div class="subtitle">Đọc từ <code>plan.md</code> • Tick “Done” để gạch • Search/Filter • Public GitHub Pages</div>
-      <div class="legend"><span class="swatch level"></span> Level &nbsp;&nbsp; <span class="swatch chapter"></span> Chapter</div>
+      <div class="legend"><span class="swatch level"></span> Level &nbsp;&nbsp; <span class="swatch chapter"></span> Chapter / Section</div>
     </div>
     <div class="controls">
       <div class="control"><input id="search" type="search" placeholder="Tìm Level/Chapter..."></div>
@@ -71,7 +71,6 @@
 </div>
 
 <script>
-// ---- Tiny Markdown -> HTML ----
 function mdToHtml(md) {
   const lines = md.replace(/\r\n/g,'\n').split('\n');
   let html = '', inList = false;
@@ -113,23 +112,26 @@ function mdToHtml(md) {
   }
 }
 
-// ---- Parse Levels/Chapters ----
 function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+
+// New parser: accept ANY H3 (#### ...) as a section. If a Level has no H3s, create an "Overview".
 function parsePlan(md) {
   const lines = md.split('\n');
   const items = [];
   let currentLevel = null;
-  let currentChapter = null;
+  let currentSection = null;
   let buffer = [];
+  let levelHasSection = false;
 
-  function pushChapter() {
-    if (!currentChapter) return;
+  function pushSection() {
+    if (!currentSection && buffer.join('\n').trim()==='') return;
     const content = buffer.join('\n').trim();
-    const id = slug((currentLevel?.title || '') + '-' + currentChapter.title);
+    const title = currentSection?.title || (currentLevel ? (currentLevel.title + ' — Overview') : 'Overview');
+    const id = slug((currentLevel?.title || '') + '-' + title);
     items.push({
       level: currentLevel?.title || 'Unknown Level',
-      title: currentChapter.title,
-      date: currentChapter.date || '',
+      title: title,
+      date: currentSection?.date || '',
       key: id,
       md: content
     });
@@ -138,19 +140,67 @@ function parsePlan(md) {
 
   for (const raw of lines) {
     const line = raw.trimEnd();
+
     const mLevel = /^###\s+(.+)$/.exec(line);
-    if (mLevel) { pushChapter(); currentLevel = { title: mLevel[1].trim() }; currentChapter = null; buffer = []; continue; }
-    const mChap = /^####\s+Chapter\s+\d+\s*\(([^)]+)\):\s*(.+)$/.exec(line);
-    if (mChap) { pushChapter(); currentChapter = { date: mChap[1], title: mChap[2].trim() }; buffer = []; continue; }
+    if (mLevel) {
+      // flush previous level
+      if (currentLevel) {
+        if (!levelHasSection) { // no sections inside previous level -> push overview for its buffer
+          pushSection();
+        } else if (buffer.length) {
+          // there was an open section; flush it
+          pushSection();
+        }
+      }
+      currentLevel = { title: mLevel[1].trim() };
+      currentSection = null;
+      buffer = [];
+      levelHasSection = false;
+      continue;
+    }
+
+    // any H3 becomes a section (#### ...)
+    const mSec = /^####\s+(.+)$/.exec(line);
+    if (mSec) {
+      // if we already had content for previous section, push it
+      if (currentLevel) {
+        if (currentSection || buffer.join('\n').trim()!=='') {
+          pushSection();
+        }
+      }
+      levelHasSection = true;
+      // Try to extract "(...)" as date if present at end of section heading with format "... (xxx) : yyy" or "... (xxx)"
+      const heading = mSec[1].trim();
+      let date = '';
+      let title = heading;
+      const mDate1 = /(.*)\(([^)]+)\)\s*:\s*(.*)$/.exec(heading);
+      const mDate2 = /(.*)\(([^)]+)\)\s*$/.exec(heading);
+      if (mDate1) { title = (mDate1[1] + mDate1[3]).trim(); date = mDate1[2].trim(); }
+      else if (mDate2) { title = mDate2[1].trim(); date = mDate2[2].trim(); }
+      currentSection = { title: title, date: date };
+      buffer = [];
+      continue;
+    }
+
     buffer.push(line);
   }
-  pushChapter();
-  if (items.length===0){ items.push({level:'Plan', title:'Full Plan', date:'', key:'full-plan', md: md}); }
+
+  // flush last level
+  if (currentLevel) {
+    if (!levelHasSection) {
+      pushSection();
+    } else if (buffer.length) {
+      pushSection();
+    }
+  }
+
+  if (items.length===0){
+    items.push({level:'Plan', title:'Full Plan', date:'', key:'full-plan', md: md});
+  }
   return items;
 }
 
-// ---- State & Render ----
-const LS_KEY = 'edward_timeline_done_planmd';
+const LS_KEY = 'edward_timeline_done_planmd_v2';
 function loadDone(){ try{ return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); }catch{return{}}}
 function saveDone(m){ try{ localStorage.setItem(LS_KEY, JSON.stringify(m)); }catch{} }
 
@@ -216,7 +266,6 @@ document.querySelectorAll('.pill').forEach(btn=>{
   });
 });
 
-// ---- Load plan.md with fetch, fallback to drop zone ----
 async function loadMarkdown(){
   const drop = document.getElementById('dropZone');
   try{
@@ -226,12 +275,11 @@ async function loadMarkdown(){
     window.__md = md;
     renderFromMarkdown(md);
   }catch(err){
-    drop.style.display = 'block'; // show fallback
+    drop.style.display = 'block';
   }
 }
 loadMarkdown();
 
-// Fallback: drag-drop or file picker
 const drop = document.getElementById('dropZone');
 const picker = document.getElementById('filepick');
 ['dragenter','dragover'].forEach(evt => drop.addEventListener(evt, e=>{ e.preventDefault(); e.stopPropagation(); drop.style.borderColor='#4fd1c5'; }));
