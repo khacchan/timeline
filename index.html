@@ -1,122 +1,74 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Edward’s Growth Timeline</title>
-  <meta name="description" content="Public self-development timeline built from Markdown" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0b0f14;
-      --card:#121822;
-      --muted:#8aa0b4;
-      --text:#e6eef6;
-      --accent:#4fd1c5;
-      --line:#2a3b52;
-      --dot:#7dd3fc;
-      --done:#93c5fd;
-      --danger:#fb7185;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji}
-    a{color:var(--accent);text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:24px}
-    header{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
-    .title{font-size:28px;font-weight:800;letter-spacing:0.2px}
-    .subtitle{color:var(--muted);font-size:14px}
-    .controls{display:flex;gap:10px;flex-wrap:wrap}
-    .control{
-      background:var(--card);border:1px solid #1f2b3a;color:var(--text);
-      padding:10px 12px;border-radius:12px;min-width:140px
-    }
-    .control input,.control select{width:100%;background:transparent;border:none;color:inherit;outline:none}
-    .pill{padding:8px 12px;border-radius:999px;border:1px solid #223146;background:transparent;color:var(--muted);cursor:pointer}
-    .pill.active{border-color:var(--accent);color:var(--accent);background:rgba(79,209,197,0.08)}
-    .timeline{position:relative;margin:26px 0 60px 0;padding-left:26px}
-    .timeline::before{
-      content:"";position:absolute;left:16px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom, transparent, var(--line) 10%, var(--line) 90%, transparent);
-    }
-    .item{position:relative;margin:22px 0 22px 6px}
-    .dot{
-      position:absolute;left:-4px;top:10px;width:18px;height:18px;border-radius:50%;
-      background:radial-gradient( circle at 30% 30%, white, var(--dot) 35%, #134e6f);
-      border:2px solid #1f2b3a;box-shadow:0 0 0 4px rgba(125,211,252,0.15);
-    }
-    .card{
-      background:linear-gradient(180deg, rgba(23,33,49,0.9), rgba(14,20,31,0.9));
-      border:1px solid #1f2b3a;border-radius:16px;padding:16px 18px 14px 18px;
-      box-shadow:0 8px 24px rgba(0,0,0,0.35);
-      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-    .card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,0.4);border-color:#2b3f58}
-    .meta{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:12px;margin-bottom:6px;flex-wrap:wrap}
-    .badge{border:1px solid #223146;border-radius:8px;padding:4px 8px}
-    .heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-    .heading h3{margin:6px 0 8px 0;font-size:18px}
-    .actions{display:flex;gap:8px;flex-wrap:wrap}
-    button.btn{
-      border:1px solid #223146;background:#0d1422;color:var(--text);
-      padding:8px 10px;border-radius:10px;cursor:pointer;font-size:13px
-    }
-    button.btn:hover{border-color:#2b3f58}
-    .done .card{opacity:.88;filter:saturate(.7)}
-    .done .content{opacity:.8}
-    .done .heading h3{text-decoration:line-through;color:var(--done)}
-    .content{line-height:1.6}
-    .content s, .content del{text-decoration:line-through}
-    .footer{margin-top:22px;color:var(--muted);font-size:12px;text-align:center}
-    .search{min-width:220px}
-    .legend{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:12px;margin-top:6px}
-    .legend .swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
-    .swatch.level{background:linear-gradient(45deg,#22d3ee,#4f46e5)}
-    .swatch.chapter{background:linear-gradient(45deg,#34d399,#10b981)}
-    .empty{padding:24px;border:1px dashed #2b3f58;border-radius:12px;color:var(--muted);text-align:center;margin:18px 0}
-    @media (max-width:640px){
-      .timeline{padding-left:20px}
-      .timeline::before{left:12px}
-      .item{margin-left:2px}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edward’s Growth Timeline (Offline)</title>
+<style>
+  :root{
+    --bg:#0b0f14; --card:#121822; --muted:#8aa0b4; --text:#e6eef6; --accent:#4fd1c5;
+    --line:#2a3b52; --dot:#7dd3fc; --done:#93c5fd;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  .container{max-width:1100px;margin:0 auto;padding:24px}
+  header{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .title{font-size:28px;font-weight:800}
+  .subtitle{color:var(--muted);font-size:13px}
+  .controls{display:flex;gap:10px;flex-wrap:wrap}
+  .control{background:var(--card);border:1px solid #1f2b3a;color:var(--text);padding:10px 12px;border-radius:12px;min-width:140px}
+  .control input{width:100%;background:transparent;border:none;color:inherit;outline:none}
+  .pill{padding:8px 12px;border-radius:999px;border:1px solid #223146;background:transparent;color:var(--muted);cursor:pointer}
+  .pill.active{border-color:var(--accent);color:var(--accent);background:rgba(79,209,197,0.08)}
+  .timeline{position:relative;margin:26px 0 60px 0;padding-left:26px}
+  .timeline::before{content:"";position:absolute;left:16px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom, transparent, var(--line) 10%, var(--line) 90%, transparent)}
+  .item{position:relative;margin:22px 0 22px 6px}
+  .dot{position:absolute;left:-4px;top:10px;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 30% 30%, white, var(--dot) 35%, #134e6f);border:2px solid #1f2b3a;box-shadow:0 0 0 4px rgba(125,211,252,0.15)}
+  .card{background:linear-gradient(180deg, rgba(23,33,49,0.9), rgba(14,20,31,0.9));border:1px solid #1f2b3a;border-radius:16px;padding:16px 18px 14px 18px;box-shadow:0 8px 24px rgba(0,0,0,0.35);transition:transform .2s, box-shadow .2s, border-color .2s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,0.4);border-color:#2b3f58}
+  .meta{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:12px;margin-bottom:6px;flex-wrap:wrap}
+  .badge{border:1px solid #223146;border-radius:8px;padding:4px 8px}
+  .heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .heading h3{margin:6px 0 8px 0;font-size:18px}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+  button.btn{border:1px solid #223146;background:#0d1422;color:var(--text);padding:8px 10px;border-radius:10px;cursor:pointer;font-size:13px}
+  button.btn:hover{border-color:#2b3f58}
+  .done .card{opacity:.88;filter:saturate(.7)}
+  .done .heading h3{text-decoration:line-through;color:var(--done)}
+  .content{line-height:1.6}
+  .content s, .content del{text-decoration:line-through}
+  .empty{padding:24px;border:1px dashed #2b3f58;border-radius:12px;color:var(--muted);text-align:center;margin:18px 0}
+  .legend{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:12px;margin-top:6px}
+  .legend .swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+  .swatch.level{background:linear-gradient(45deg,#22d3ee,#4f46e5)}
+  .swatch.chapter{background:linear-gradient(45deg,#34d399,#10b981)}
+  @media (max-width:640px){.timeline{padding-left:20px}.timeline::before{left:12px}.item{margin-left:2px}}
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <div class="title">Edward’s Growth Timeline</div>
-        <div class="subtitle">Scroll timeline • Toggle done to strike-through • Auto-save in your browser</div>
-        <div class="legend">
-          <span class="swatch level"></span> Level &nbsp;&nbsp; <span class="swatch chapter"></span> Chapter
-        </div>
-      </div>
-      <div class="controls">
-        <div class="control search">
-          <input id="search" type="search" placeholder="Tìm Level/Chapter..." />
-        </div>
-        <button class="pill active" data-filter="all">All</button>
-        <button class="pill" data-filter="undone">Undone</button>
-        <button class="pill" data-filter="done">Done</button>
-      </div>
-    </header>
-
-    <div id="root"></div>
-
-    <div class="footer">
-      Built with ❤️ on React + Marked. Host this file on GitHub Pages by committing it as <code>index.html</code>.<br/>
-      State is per-browser via <code>localStorage</code> (public viewers won’t see your personal ticks).
+<div class="container">
+  <header>
+    <div>
+      <div class="title">Edward’s Growth Timeline</div>
+      <div class="subtitle">Offline bản một file • Tích “Done” để gạch • Tự lưu qua localStorage</div>
+      <div class="legend"><span class="swatch level"></span> Level &nbsp;&nbsp; <span class="swatch chapter"></span> Chapter</div>
     </div>
+    <div class="controls">
+      <div class="control"><input id="search" type="search" placeholder="Tìm Level/Chapter..."></div>
+      <button class="pill active" data-filter="all">All</button>
+      <button class="pill" data-filter="undone">Undone</button>
+      <button class="pill" data-filter="done">Done</button>
+    </div>
+  </header>
+  <div id="timeline" class="timeline"></div>
+  <div class="empty" id="empty" style="display:none">Không có mục nào khớp bộ lọc/tìm kiếm.</div>
+  <div style="margin-top:22px;color:#8aa0b4;font-size:12px;text-align:center">
+    File này chạy hoàn toàn offline. Chỉ cần upload thành <code>index.html</code> lên GitHub Pages là public được.
   </div>
+</div>
 
-  <!-- React & Marked CDN -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/marked/marked.min.js"></script>
-  <script>
-    // Raw Markdown embedded here:
-  </script>
-  <script type="text/markdown" id="plan-md">
+<!-- Embedded Markdown -->
+<script type="text/markdown" id="plan-md">
 ### Level 1: Building the Foundation (90 Days)
 
 #### Chapter 1 (Days 1–7): Body Conditioning – “Rebuilding Energy & Health”
@@ -604,167 +556,191 @@ This level is no longer about "ascending" but about returning to the ordinary wo
 
 **V. AFTER LEVEL 9 – “BEYOND LEVELS”**
 Once Unification is achieved, there are no more levels. There is only the endless flow of learning, creating, and loving. The journey of development ends because the practitioner and the principles being practiced have become one.
-  </script>
+</script>
 
-  <script>
-    // Utility: slugify for IDs
-    const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+<script>
+// --- Tiny Markdown -> HTML (basic) ---
+function mdToHtml(md) {
+  const lines = md.replace(/\r\n/g,'\n').split('\n');
+  let html = '', inList = false;
+  function closeList(){ if(inList){ html += '</ul>'; inList=false; } }
+  for (let raw of lines) {
+    const line = raw.trimRight();
+    if (/^###\s+/.test(line)) { closeList(); html += `<h2>${escapeHtml(line.replace(/^###\s+/,'').trim())}</h2>`; continue; }
+    if (/^####\s+/.test(line)) { closeList(); html += `<h3>${escapeHtml(line.replace(/^####\s+/,'').trim())}</h3>`; continue; }
+    if (/^\*\*\*+$/.test(line)) { closeList(); html += '<hr/>'; continue; }
+    if (/^\*\s+/.test(line) || /^-\s+/.test(line)) {
+      if (!inList) { html += '<ul>'; inList = true; }
+      const t = line.replace(/^\*\s+|^-\s+/, '');
+      html += `<li>${inline(t)}</li>`;
+      continue;
+    }
+    if (line === '') { closeList(); html += ''; continue; }
+    // paragraph
+    closeList();
+    html += `<p>${inline(line)}</p>`;
+  }
+  closeList();
+  return html;
 
-    // Parse the Markdown into structured items (Levels -> Chapters)
-    function parsePlan(md) {
-      const lines = md.split('\\n');
-      const items = [];
-      let currentLevel = null;
-      let currentChapter = null;
-      let buffer = [];
+  function inline(t){
+    // bold
+    t = t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // italic (single *)
+    t = t.replace(/(^|[^\*])\*(?!\s)(.+?)\*(?!\w)/g, '$1<em>$2</em>');
+    // strike ~~text~~
+    t = t.replace(/~~(.+?)~~/g, '<s>$1</s>');
+    // quotes “text” or "text" -> keep
+    return linkify(escapeHtmlExceptBasic(t));
+  }
+  function escapeHtml(s){ return s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+  function escapeHtmlExceptBasic(s){
+    // allow <strong>, <em>, <s> already inserted; escape others
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/&lt;(strong|em|s)&gt;/g,'<$1>').replace(/&lt;\/(strong|em|s)&gt;/g,'</$1>');
+  }
+  function linkify(text){
+    return text.replace(/(https?:\/\/[^\s)]+)|(\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b)/gi, function(m){
+      if (m.indexOf('http')===0){ return `<a href="${m}" target="_blank" rel="noopener">${m}</a>`; }
+      return `<a href="mailto:${m}">${m}</a>`;
+    });
+  }
+}
 
-      const pushChapter = () => {
-        if (!currentChapter) return;
-        const content = buffer.join('\\n').trim();
-        const id = slug((currentLevel?.title || '') + '-' + currentChapter.title);
-        items.push({
-          type: 'chapter',
-          level: currentLevel?.title || 'Unknown Level',
-          levelOrder: currentLevel?.order || 0,
-          title: currentChapter.title,
-          date: currentChapter.date || '',
-          key: id,
-          md: content
-        });
-        buffer = [];
-      };
+// --- Parse Levels/Chapters into items ---
+function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
 
-      lines.forEach((raw) => {
-        const line = raw.trimEnd();
+function parsePlan(md) {
+  const lines = md.split('\n');
+  const items = [];
+  let currentLevel = null;
+  let currentChapter = null;
+  let buffer = [];
 
-        // Level
-        const mLevel = /^###\\s+(.+)$/.exec(line);
-        if (mLevel) {
-          // flush previous chapter
-          pushChapter();
-          const title = mLevel[1].trim();
-          const order = items.filter(i => i.type==='chapter').length + 1;
-          currentLevel = { title, order };
-          currentChapter = null;
-          buffer = [];
-          return;
-        }
+  function pushChapter() {
+    if (!currentChapter) return;
+    const content = buffer.join('\n').trim();
+    const id = slug((currentLevel?.title || '') + '-' + currentChapter.title);
+    items.push({
+      level: currentLevel?.title || 'Unknown Level',
+      title: currentChapter.title,
+      date: currentChapter.date || '',
+      key: id,
+      md: content
+    });
+    buffer = [];
+  }
 
-        // Chapter with day range inside parentheses
-        const mChap = /^####\\s+Chapter\\s+\\d+\\s*\\(([^)]+)\\):\\s*(.+)$/.exec(line);
-        if (mChap) {
-          // flush previous chapter
-          pushChapter();
-          currentChapter = { date: mChap[1], title: mChap[2].trim() };
-          buffer = [];
-          return;
-        }
+  for (const raw of lines) {
+    const line = raw.trimEnd();
 
-        // If neither, collect content
-        buffer.push(line);
-      });
-
-      // flush last
+    const mLevel = /^###\s+(.+)$/.exec(line);
+    if (mLevel) {
       pushChapter();
-
-      // Fallback: if nothing parsed, create single item with full md
-      if (items.length === 0) {
-        items.push({
-          type:'chapter',
-          level:'Plan',
-          levelOrder:1,
-          title:'Full Plan',
-          date:'',
-          key:'full-plan',
-          md:md
-        });
-      }
-      return items;
+      currentLevel = { title: mLevel[1].trim() };
+      currentChapter = null;
+      buffer = [];
+      continue;
     }
 
-    // LocalStorage helpers
-    const LS_KEY = 'edward_timeline_done';
-    function loadDone() {
-      try {
-        const v = localStorage.getItem(LS_KEY);
-        return v ? JSON.parse(v) : {};
-      } catch { return {}; }
-    }
-    function saveDone(state) {
-      try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch {}
+    const mChap = /^####\s+Chapter\s+\d+\s*\(([^)]+)\):\s*(.+)$/.exec(line);
+    if (mChap) {
+      pushChapter();
+      currentChapter = { date: mChap[1], title: mChap[2].trim() };
+      buffer = [];
+      continue;
     }
 
-    // React App
-    const { useMemo, useState, useEffect } = React;
+    buffer.push(line);
+  }
+  pushChapter();
 
-    function App() {
-      const md = document.getElementById('plan-md').textContent;
-      const allItems = useMemo(() => parsePlan(md), [md]);
-      const [doneMap, setDoneMap] = useState(loadDone());
-      const [query, setQuery] = useState('');
-      const [filter, setFilter] = useState('all');
+  if (items.length===0){
+    items.push({level:'Plan', title:'Full Plan', date:'', key:'full-plan', md: md});
+  }
+  return items;
+}
 
-      useEffect(() => { saveDone(doneMap); }, [doneMap]);
+// --- Render Timeline ---
+const LS_KEY = 'edward_timeline_done_offline';
+function loadDone(){ try{ return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); }catch{return{}}}
+function saveDone(m){ try{ localStorage.setItem(LS_KEY, JSON.stringify(m)); }catch{} }
 
-      const filtered = allItems.filter(it => {
-        const q = query.trim().toLowerCase();
-        const base = (it.title + ' ' + it.level + ' ' + it.date).toLowerCase();
-        if (q && !base.includes(q)) return false;
-        const isDone = !!doneMap[it.key];
-        if (filter === 'done' && !isDone) return false;
-        if (filter === 'undone' && isDone) return false;
-        return true;
-      });
+const md = document.getElementById('plan-md').textContent;
+const allItems = parsePlan(md);
+let doneMap = loadDone();
+let filter = 'all';
+let query = '';
 
-      const onToggle = (k) => setDoneMap((m) => ({ ...m, [k]: !m[k] }));
+const timelineEl = document.getElementById('timeline');
+const emptyEl = document.getElementById('empty');
 
-      useEffect(() => {
-        const searchEl = document.getElementById('search');
-        const pills = document.querySelectorAll('.pill');
-        const onInput = (e) => setQuery(e.target.value);
-        searchEl.addEventListener('input', onInput);
-        pills.forEach(p => {
-          p.addEventListener('click', () => {
-            pills.forEach(x => x.classList.remove('active'));
-            p.classList.add('active');
-            setFilter(p.getAttribute('data-filter'));
-          });
-        });
-        return () => {
-          searchEl.removeEventListener('input', onInput);
-        };
-      }, []);
+function render(){
+  timelineEl.innerHTML = '';
+  const q = query.trim().toLowerCase();
+  let count = 0;
+  for (const it of allItems){
+    const isDone = !!doneMap[it.key];
+    if (filter === 'done' && !isDone) continue;
+    if (filter === 'undone' && isDone) continue;
+    const text = (it.title + ' ' + it.level + ' ' + it.date).toLowerCase();
+    if (q && !text.includes(q)) continue;
 
-      return React.createElement('div', { className:'timeline' },
-        filtered.length === 0 && React.createElement('div', { className:'empty' }, 'Không có mục nào khớp bộ lọc/tìm kiếm.'),
-        filtered.map(it => React.createElement(Item, {
-          key: it.key, item: it, done: !!doneMap[it.key], onToggle
-        }))
-      );
-    }
+    const item = document.createElement('div');
+    item.className = 'item' + (isDone ? ' done' : '');
 
-    function Item({ item, done, onToggle }) {
-      const html = marked.parse(item.md || '');
-      return React.createElement('div', { className: 'item' + (done ? ' done' : '') },
-        React.createElement('div', { className:'dot' }),
-        React.createElement('div', { className:'card' },
-          React.createElement('div', { className:'meta' },
-            React.createElement('span', { className:'badge' }, item.level),
-            item.date ? React.createElement('span', { className:'badge' }, item.date) : null
-          ),
-          React.createElement('div', { className:'heading' },
-            React.createElement('h3', null, item.title),
-            React.createElement('div', { className:'actions' },
-              React.createElement('button', { className:'btn', onClick: () => onToggle(item.key) }, done ? 'Mark as Undone' : 'Mark as Done'),
-              React.createElement('a', { className:'btn', href:'#'+item.key, onClick:(e)=>{e.preventDefault();document.getElementById(item.key)?.scrollIntoView({behavior:'smooth',block:'center'});} }, 'Jump')
-            )
-          ),
-          React.createElement('div', { id:item.key, className:'content', dangerouslySetInnerHTML:{ __html: html } })
-        )
-      );
-    }
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    item.appendChild(dot);
 
-    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
-  </script>
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+    const b1 = document.createElement('span'); b1.className = 'badge'; b1.textContent = it.level; meta.appendChild(b1);
+    if (it.date){ const b2 = document.createElement('span'); b2.className = 'badge'; b2.textContent = it.date; meta.appendChild(b2); }
+    card.appendChild(meta);
+
+    const head = document.createElement('div');
+    head.className = 'heading';
+    const h3 = document.createElement('h3');
+    h3.textContent = it.title;
+    head.appendChild(h3);
+
+    const actions = document.createElement('div'); actions.className = 'actions';
+    const btn = document.createElement('button'); btn.className = 'btn'; btn.textContent = isDone ? 'Mark as Undone' : 'Mark as Done';
+    btn.addEventListener('click', ()=>{ doneMap[it.key] = !doneMap[it.key]; saveDone(doneMap); render(); });
+    const jump = document.createElement('a'); jump.className = 'btn'; jump.href = '#'+it.key; jump.textContent = 'Jump';
+    jump.addEventListener('click', (e)=>{ e.preventDefault(); document.getElementById(it.key)?.scrollIntoView({behavior:'smooth', block:'center'}); });
+    actions.appendChild(btn); actions.appendChild(jump);
+    head.appendChild(actions);
+    card.appendChild(head);
+
+    const content = document.createElement('div');
+    content.className = 'content';
+    content.id = it.key;
+    content.innerHTML = mdToHtml(it.md);
+    card.appendChild(content);
+
+    item.appendChild(card);
+    timelineEl.appendChild(item);
+    count++;
+  }
+  emptyEl.style.display = count === 0 ? '' : 'none';
+}
+
+document.getElementById('search').addEventListener('input', (e)=>{ query = e.target.value; render(); });
+document.querySelectorAll('.pill').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+    filter = btn.getAttribute('data-filter');
+    render();
+  });
+});
+
+render();
+</script>
 </body>
 </html>
